@@ -1,6 +1,7 @@
 #include <iostream>
 #include <memory>
 #include <list>
+#include <vector>
  
 class Graph {
     public:
@@ -9,6 +10,8 @@ class Graph {
         void AddEdge(int v, int w); 
 
         void PrintEdges() const;
+
+        void MVC() const;
 
     private:
         int m_NumVertices;
@@ -38,12 +41,43 @@ void Graph::PrintEdges() const {
     }
 }
 
-int main(int argc, char **argv) {
-    std::shared_ptr<Graph> graph(new Graph(3));
+void Graph::MVC() const {
+    std::vector<bool> visited(m_NumVertices, false);
 
-    graph->AddEdge(0, 1);
-    graph->AddEdge(1, 2);
+    for (int v = 0; v < m_NumVertices; v++) {
+        if (!visited[v]) {
+
+            for (auto w : m_AdjList[v]) {
+                
+            }
+
+             for (i= adj[u].begin(); i != adj[u].end(); ++i)
+            {
+                int v = *i;
+                if (visited[v] == false)
+                {
+                     // Add the vertices (u, v) to the result set.
+                     // We make the vertex u and v visited so that
+                     // all edges from/to them would be ignored
+                     visited[v] = true;
+                     visited[u]  = true;
+                     break;
+                }
+            }
+        }
+    }
+}
+
+int main(int argc, char **argv) {
+    std::shared_ptr<Graph> graph(new Graph(6));
+
+    graph->AddEdge(4, 2);
+    graph->AddEdge(1, 3);
+    graph->AddEdge(4, 5);
+    graph->AddEdge(3, 4);
+    graph->AddEdge(1, 4);
     graph->AddEdge(2, 0);
+    graph->AddEdge(0, 1);
 
     graph->PrintEdges();
 
